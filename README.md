@@ -17,7 +17,8 @@ Diseñado y probado para **MariaDB 10.4+** y compatible con **MySQL 8+**.
 - `docs/evidencias_pruebas.md`: resumen de resultados de pruebas.
 - `docs/diccionario_datos.md`: diccionario completo de tablas y columnas.
 - `docs/dependencias_funcionales.md`: matriz de dependencias y decisiones de normalización.
-- `docs/memoria_tecnica_borrador.md`: borrador de la memoria técnica final.
+- `docs/memoria_tecnica.pdf`: memoria técnica final en PDF.
+- `docs/memoria_tecnica.md`: fuente editable de la memoria técnica.
 
 ## Requisitos
 

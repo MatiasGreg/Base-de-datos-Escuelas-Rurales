@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="MatiasGreg" />
+  <title>Memoria Técnica</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="memoria_tecnica.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Memoria Técnica</h1>
+<p class="subtitle">Sistema de Gestión de Base de Datos para Escuelas
+Rurales</p>
+<p class="author">MatiasGreg</p>
+<p class="date">18 de noviembre de 2026</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#resumen-ejecutivo" id="toc-resumen-ejecutivo"><span
+class="toc-section-number">1</span> Resumen ejecutivo</a></li>
+<li><a href="#introducción-y-contexto"
+id="toc-introducción-y-contexto"><span
+class="toc-section-number">2</span> Introducción y contexto</a>
+<ul>
+<li><a href="#descripción-del-problema"
+id="toc-descripción-del-problema"><span
+class="toc-section-number">2.1</span> 1. Descripción del
+problema</a></li>
+<li><a href="#objetivos" id="toc-objetivos"><span
+class="toc-section-number">2.2</span> 2. Objetivos</a>
+<ul>
+<li><a href="#objetivo-general" id="toc-objetivo-general"><span
+class="toc-section-number">2.2.1</span> Objetivo general</a></li>
+<li><a href="#objetivos-específicos"
+id="toc-objetivos-específicos"><span
+class="toc-section-number">2.2.2</span> Objetivos específicos</a></li>
+</ul></li>
+<li><a href="#alcance" id="toc-alcance"><span
+class="toc-section-number">2.3</span> 3. Alcance</a></li>
+</ul></li>
+<li><a href="#fase-1-especificación-y-modelo-conceptual"
+id="toc-fase-1-especificación-y-modelo-conceptual"><span
+class="toc-section-number">3</span> Fase 1: especificación y modelo
+conceptual</a>
+<ul>
+<li><a href="#requerimientos-funcionales"
+id="toc-requerimientos-funcionales"><span
+class="toc-section-number">3.1</span> 1. Requerimientos
+funcionales</a></li>
+<li><a href="#reglas-de-negocio" id="toc-reglas-de-negocio"><span
+class="toc-section-number">3.2</span> 2. Reglas de negocio</a></li>
+<li><a href="#catálogo-de-entidades"
+id="toc-catálogo-de-entidades"><span
+class="toc-section-number">3.3</span> 3. Catálogo de entidades</a></li>
+<li><a href="#diagrama-entidad-relación"
+id="toc-diagrama-entidad-relación"><span
+class="toc-section-number">3.4</span> 4. Diagrama
+Entidad-Relación</a></li>
+</ul></li>
+<li><a href="#fase-2-modelo-lógico-y-normalización"
+id="toc-fase-2-modelo-lógico-y-normalización"><span
+class="toc-section-number">4</span> Fase 2: modelo lógico y
+normalización</a>
+<ul>
+<li><a href="#modelo-relacional" id="toc-modelo-relacional"><span
+class="toc-section-number">4.1</span> 1. Modelo relacional</a></li>
+<li><a href="#primera-forma-normal" id="toc-primera-forma-normal"><span
+class="toc-section-number">4.2</span> 2. Primera forma normal</a></li>
+<li><a href="#segunda-forma-normal" id="toc-segunda-forma-normal"><span
+class="toc-section-number">4.3</span> 3. Segunda forma normal</a></li>
+<li><a href="#tercera-forma-normal" id="toc-tercera-forma-normal"><span
+class="toc-section-number">4.4</span> 4. Tercera forma normal</a></li>
+<li><a href="#matriz-de-dependencias-funcionales"
+id="toc-matriz-de-dependencias-funcionales"><span
+class="toc-section-number">4.5</span> 5. Matriz de dependencias
+funcionales</a></li>
+<li><a href="#acciones-referenciales"
+id="toc-acciones-referenciales"><span
+class="toc-section-number">4.6</span> 6. Acciones referenciales</a></li>
+<li><a href="#coherencia-no-cubierta-por-3fn"
+id="toc-coherencia-no-cubierta-por-3fn"><span
+class="toc-section-number">4.7</span> 7. Coherencia no cubierta por
+3FN</a></li>
+</ul></li>
+<li><a href="#fase-3-implementación-física"
+id="toc-fase-3-implementación-física"><span
+class="toc-section-number">5</span> Fase 3: implementación física</a>
+<ul>
+<li><a href="#motor-y-creación" id="toc-motor-y-creación"><span
+class="toc-section-number">5.1</span> 1. Motor y creación</a></li>
+<li><a href="#restricciones" id="toc-restricciones"><span
+class="toc-section-number">5.2</span> 2. Restricciones</a></li>
+<li><a href="#diccionario-de-datos" id="toc-diccionario-de-datos"><span
+class="toc-section-number">5.3</span> 3. Diccionario de datos</a></li>
+<li><a href="#carga-de-datos" id="toc-carga-de-datos"><span
+class="toc-section-number">5.4</span> 4. Carga de datos</a></li>
+</ul></li>
+<li><a href="#fase-4-lógica-avanzada-y-optimización"
+id="toc-fase-4-lógica-avanzada-y-optimización"><span
+class="toc-section-number">6</span> Fase 4: lógica avanzada y
+optimización</a>
+<ul>
+<li><a href="#vistas" id="toc-vistas"><span
+class="toc-section-number">6.1</span> 1. Vistas</a></li>
+<li><a href="#funciones" id="toc-funciones"><span
+class="toc-section-number">6.2</span> 2. Funciones</a></li>
+<li><a href="#procedimientos" id="toc-procedimientos"><span
+class="toc-section-number">6.3</span> 3. Procedimientos</a></li>
+<li><a href="#triggers" id="toc-triggers"><span
+class="toc-section-number">6.4</span> 4. Triggers</a></li>
+<li><a href="#consultas-analíticas-avanzadas"
+id="toc-consultas-analíticas-avanzadas"><span
+class="toc-section-number">6.5</span> 5. Consultas analíticas
+avanzadas</a></li>
+<li><a href="#índices-y-explain" id="toc-índices-y-explain"><span
+class="toc-section-number">6.6</span> 6. Índices y EXPLAIN</a></li>
+<li><a href="#estrés-concurrente" id="toc-estrés-concurrente"><span
+class="toc-section-number">6.7</span> 7. Estrés concurrente</a></li>
+</ul></li>
+<li><a href="#fase-5-pruebas-y-evidencia"
+id="toc-fase-5-pruebas-y-evidencia"><span
+class="toc-section-number">7</span> Fase 5: pruebas y evidencia</a>
+<ul>
+<li><a href="#entorno-de-validación"
+id="toc-entorno-de-validación"><span
+class="toc-section-number">7.1</span> 1. Entorno de validación</a></li>
+<li><a href="#resultado-de-carga" id="toc-resultado-de-carga"><span
+class="toc-section-number">7.2</span> 2. Resultado de carga</a></li>
+<li><a href="#pruebas-de-restricciones"
+id="toc-pruebas-de-restricciones"><span
+class="toc-section-number">7.3</span> 3. Pruebas de
+restricciones</a></li>
+<li><a href="#pruebas-de-objetos-programables"
+id="toc-pruebas-de-objetos-programables"><span
+class="toc-section-number">7.4</span> 4. Pruebas de objetos
+programables</a></li>
+<li><a href="#prueba-concurrente" id="toc-prueba-concurrente"><span
+class="toc-section-number">7.5</span> 5. Prueba concurrente</a></li>
+</ul></li>
+<li><a href="#conclusiones" id="toc-conclusiones"><span
+class="toc-section-number">8</span> Conclusiones</a></li>
+<li><a href="#trabajo-futuro" id="toc-trabajo-futuro"><span
+class="toc-section-number">9</span> Trabajo futuro</a></li>
+<li><a href="#referencias-de-entrega"
+id="toc-referencias-de-entrega"><span
+class="toc-section-number">10</span> Referencias de entrega</a></li>
+</ul>
+</nav>
+<h1 data-number="1" id="resumen-ejecutivo"><span
+class="header-section-number">1</span> Resumen ejecutivo</h1>
+<p>Esta memoria documenta el diseño, implementación, pruebas y
+optimización del sistema de gestión de datos para escuelas rurales. La
+solución administra municipios, sedes, conexiones, historial operativo,
+dispositivos, responsables, mediciones, incidencias, técnicos y
+auditorías.</p>
+<p>El modelo contiene 12 tablas relacionales y está diseñado para
+cumplir al menos la tercera forma normal (3FN). Está implementado para
+MariaDB 10.4 o superior, utiliza InnoDB e integridad referencial
+estricta, y fue validado mediante una instalación limpia, carga de al
+menos 50 registros por tabla, pruebas automatizadas, análisis de planes
+de ejecución y prueba de concurrencia.</p>
+<p><strong>Repositorio del proyecto:</strong>
+https://github.com/MatiasGreg/Base-de-datos-Escuelas-Rurales</p>
+<h1 data-number="2" id="introducción-y-contexto"><span
+class="header-section-number">2</span> Introducción y contexto</h1>
+<h2 data-number="2.1" id="descripción-del-problema"><span
+class="header-section-number">2.1</span> 1. Descripción del
+problema</h2>
+<p>Las instituciones educativas rurales requieren controlar la
+disponibilidad de los servicios de conectividad y el estado de su
+dotación tecnológica. Los datos deben permitir conocer qué sede tiene
+problemas, qué proveedor o conexión está involucrada, qué equipo fue
+afectado, quién atiende cada incidencia y qué cambios fueron realizados
+sobre el inventario.</p>
+<p>El problema requiere conservar historiales de estado, evitar
+inconsistencias entre incidencias y recursos de una sede, calcular
+tiempos de reparación, asignar varios técnicos a una incidencia y
+preservar auditorías aunque un dispositivo sea retirado del
+inventario.</p>
+<h2 data-number="2.2" id="objetivos"><span
+class="header-section-number">2.2</span> 2. Objetivos</h2>
+<h3 data-number="2.2.1" id="objetivo-general"><span
+class="header-section-number">2.2.1</span> Objetivo general</h3>
+<p>Diseñar e implementar una base de datos relacional completa que
+centralice y proteja la información operativa de conectividad y
+mantenimiento tecnológico en escuelas rurales.</p>
+<h3 data-number="2.2.2" id="objetivos-específicos"><span
+class="header-section-number">2.2.2</span> Objetivos específicos</h3>
+<ul>
+<li>Identificar requerimientos funcionales y reglas de negocio.</li>
+<li>Construir el diagrama Entidad-Relación y el modelo relacional.</li>
+<li>Aplicar las tres primeras formas normales.</li>
+<li>Implementar tablas, restricciones, índices y datos de prueba.</li>
+<li>Desarrollar vistas, funciones, procedimientos y triggers.</li>
+<li>Ejecutar pruebas de integridad, transacciones y concurrencia.</li>
+<li>Analizar consultas mediante planes de ejecución y justificar los
+índices.</li>
+</ul>
+<h2 data-number="2.3" id="alcance"><span
+class="header-section-number">2.3</span> 3. Alcance</h2>
+<p>El alcance incluye el ciclo completo de diseño y almacenamiento. No
+incluye una interfaz gráfica de usuario ni autenticación de aplicación;
+estas funciones quedan identificadas como trabajo futuro.</p>
+<h1 data-number="3" id="fase-1-especificación-y-modelo-conceptual"><span
+class="header-section-number">3</span> Fase 1: especificación y modelo
+conceptual</h1>
+<h2 data-number="3.1" id="requerimientos-funcionales"><span
+class="header-section-number">3.1</span> 1. Requerimientos
+funcionales</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Requerimiento</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R01</td>
+<td>Registrar municipio y zona de cada sede educativa.</td>
+</tr>
+<tr class="even">
+<td>R02</td>
+<td>Registrar conexiones instaladas por sede, proveedor, tipo, velocidad
+y vigencia.</td>
+</tr>
+<tr class="odd">
+<td>R03</td>
+<td>Mantener el historial de estados de las conexiones con fecha y
+hora.</td>
+</tr>
+<tr class="even">
+<td>R04</td>
+<td>Registrar inventario, responsable y estado físico de
+dispositivos.</td>
+</tr>
+<tr class="odd">
+<td>R05</td>
+<td>Registrar incidencias y mantenimientos con apertura y cierre.</td>
+</tr>
+<tr class="even">
+<td>R06</td>
+<td>Almacenar mediciones periódicas de horas de servicio activo.</td>
+</tr>
+<tr class="odd">
+<td>R07</td>
+<td>Asignar uno o varios técnicos principales o de apoyo a cada
+incidencia.</td>
+</tr>
+<tr class="even">
+<td>R08</td>
+<td>Auditar cambios reales de estado físico y responsable.</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="3.2" id="reglas-de-negocio"><span
+class="header-section-number">3.2</span> 2. Reglas de negocio</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ID</th>
+<th>Política</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RN01</td>
+<td>Una sede puede tener múltiples conexiones simultáneas o
+secuenciales.</td>
+</tr>
+<tr class="even">
+<td>RN02</td>
+<td>El historial de conexión es incremental e inmutable.</td>
+</tr>
+<tr class="odd">
+<td>RN03</td>
+<td>Todo dispositivo tiene un responsable basado en cargo o
+dependencia.</td>
+</tr>
+<tr class="even">
+<td>RN04</td>
+<td>El tiempo de reparación se calcula, no se digita ni almacena.</td>
+</tr>
+<tr class="odd">
+<td>RN05</td>
+<td>Conexión y dispositivo de una incidencia deben pertenecer a su
+sede.</td>
+</tr>
+<tr class="even">
+<td>RN06</td>
+<td>Técnicos identificados por código; atenciones requieren
+desactivación, no borrado.</td>
+</tr>
+<tr class="odd">
+<td>RN07</td>
+<td>Cada cambio real de estado físico o responsable deja auditoría
+histórica.</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="3.3" id="catálogo-de-entidades"><span
+class="header-section-number">3.3</span> 3. Catálogo de entidades</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Entidad</th>
+<th>Tipo</th>
+<th>Función</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MUNICIPIO</td>
+<td>Catálogo</td>
+<td>Identifica la división administrativa.</td>
+</tr>
+<tr class="even">
+<td>SEDE_EDUCATIVA</td>
+<td>Fuerte</td>
+<td>Representa una escuela rural o sede.</td>
+</tr>
+<tr class="odd">
+<td>PROVEEDOR</td>
+<td>Catálogo</td>
+<td>Identifica el servicio de telecomunicaciones.</td>
+</tr>
+<tr class="even">
+<td>CONEXION</td>
+<td>Transaccional</td>
+<td>Representa un enlace y su vigencia.</td>
+</tr>
+<tr class="odd">
+<td>HISTORIAL_ESTADO_CONEXION</td>
+<td>Débil/histórico</td>
+<td>Conserva cambios de estado.</td>
+</tr>
+<tr class="even">
+<td>RESPONSABLE</td>
+<td>Catálogo</td>
+<td>Describe cargos o dependencias custodias.</td>
+</tr>
+<tr class="odd">
+<td>DISPOSITIVO</td>
+<td>Transaccional</td>
+<td>Registra equipos tecnológicos.</td>
+</tr>
+<tr class="even">
+<td>INCIDENCIA</td>
+<td>Transaccional</td>
+<td>Registra fallas y mantenimientos.</td>
+</tr>
+<tr class="odd">
+<td>MEDICION_USO</td>
+<td>Transaccional</td>
+<td>Conserva disponibilidad mensual.</td>
+</tr>
+<tr class="even">
+<td>TECNICO</td>
+<td>Catálogo</td>
+<td>Identifica personal por código anonimizado y especialidad.</td>
+</tr>
+<tr class="odd">
+<td>INCIDENCIA_TECNICO</td>
+<td>Asociativa N:M</td>
+<td>Define técnico principal o de apoyo por incidencia.</td>
+</tr>
+<tr class="even">
+<td>AUDITORIA_DISPOSITIVO</td>
+<td>Bitácora</td>
+<td>Conserva cambios históricos sin FK al dispositivo.</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="3.4" id="diagrama-entidad-relación"><span
+class="header-section-number">3.4</span> 4. Diagrama
+Entidad-Relación</h2>
+<figure>
+<img src="diagrama_er.png" alt="Diagrama Entidad-Relación" />
+<figcaption aria-hidden="true">Diagrama Entidad-Relación</figcaption>
+</figure>
+<p>La relación muchos a muchos entre <code>INCIDENCIA</code> y
+<code>TECNICO</code> se resuelve mediante
+<code>INCIDENCIA_TECNICO</code>. <code>AUDITORIA_DISPOSITIVO</code>
+conserva el valor <code>codigo_inventario</code> como referencia
+histórica, sin llave foránea, para proteger la evidencia aunque el
+equipo sea retirado del inventario.</p>
+<h1 data-number="4" id="fase-2-modelo-lógico-y-normalización"><span
+class="header-section-number">4</span> Fase 2: modelo lógico y
+normalización</h1>
+<h2 data-number="4.1" id="modelo-relacional"><span
+class="header-section-number">4.1</span> 1. Modelo relacional</h2>
+<p>Las claves primarias y foráneas quedan distribuidas de la siguiente
+manera:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Tabla</th>
+<th>Clave primaria</th>
+<th>Claves foráneas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MUNICIPIO</td>
+<td>id_municipio</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>PROVEEDOR</td>
+<td>id_proveedor</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>RESPONSABLE</td>
+<td>id_responsable</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>TECNICO</td>
+<td>id_tecnico</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>SEDE_EDUCATIVA</td>
+<td>id_sede</td>
+<td>id_municipio</td>
+</tr>
+<tr class="even">
+<td>CONEXION</td>
+<td>id_conexion</td>
+<td>id_sede, id_proveedor</td>
+</tr>
+<tr class="odd">
+<td>HISTORIAL_ESTADO_CONEXION</td>
+<td>id_historial</td>
+<td>id_conexion</td>
+</tr>
+<tr class="even">
+<td>DISPOSITIVO</td>
+<td>codigo_inventario</td>
+<td>id_sede, id_responsable</td>
+</tr>
+<tr class="odd">
+<td>INCIDENCIA</td>
+<td>id_incidencia</td>
+<td>id_sede, id_conexion, codigo_inventario</td>
+</tr>
+<tr class="even">
+<td>MEDICION_USO</td>
+<td>id_medicion</td>
+<td>id_conexion</td>
+</tr>
+<tr class="odd">
+<td>INCIDENCIA_TECNICO</td>
+<td>id_incidencia, id_tecnico</td>
+<td>ambas</td>
+</tr>
+<tr class="even">
+<td>AUDITORIA_DISPOSITIVO</td>
+<td>id_auditoria</td>
+<td>ninguna</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="4.2" id="primera-forma-normal"><span
+class="header-section-number">4.2</span> 2. Primera forma normal</h2>
+<p>Se utilizaron columnas individuales, valores atómicos y no se
+almacenaron listas repetidas. Los estados de conexión se separaron a
+<code>HISTORIAL_ESTADO_CONEXION</code>. Los técnicos asignados se
+representan con filas de <code>INCIDENCIA_TECNICO</code>, no con
+columnas <code>tecnico_1</code> y <code>tecnico_2</code>.</p>
+<h2 data-number="4.3" id="segunda-forma-normal"><span
+class="header-section-number">4.3</span> 3. Segunda forma normal</h2>
+<p>Las relaciones con claves simples tienen atributos que dependen
+completamente de su clave primaria. En <code>INCIDENCIA_TECNICO</code>,
+la clave compuesta (<code>id_incidencia</code>, <code>id_tecnico</code>)
+determina <code>rol_asignado</code> y <code>fecha_asignacion</code>.</p>
+<h2 data-number="4.4" id="tercera-forma-normal"><span
+class="header-section-number">4.4</span> 4. Tercera forma normal</h2>
+<p>Los nombres de municipios, proveedores, responsables y técnicos no se
+repiten dentro de las relaciones transaccionales. Cada dato depende de
+la llave primaria sin pasar por una columna no clave:</p>
+<ul>
+<li><code>SEDE_EDUCATIVA.id_municipio</code> reemplaza el nombre del
+municipio.</li>
+<li><code>CONEXION.id_proveedor</code> reemplaza el nombre del
+proveedor.</li>
+<li><code>DISPOSITIVO.id_responsable</code> reemplaza la descripción del
+cargo.</li>
+<li><code>INCIDENCIA_TECNICO</code> separa asignación, incidencia y
+técnico.</li>
+<li>Las horas de reparación y disponibilidad son derivadas, no
+columnas.</li>
+</ul>
+<h2 data-number="4.5" id="matriz-de-dependencias-funcionales"><span
+class="header-section-number">4.5</span> 5. Matriz de dependencias
+funcionales</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Relación</th>
+<th>Determinante</th>
+<th>Atributos determinados</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MUNICIPIO</td>
+<td>id_municipio</td>
+<td>nombre_municipio</td>
+</tr>
+<tr class="even">
+<td>PROVEEDOR</td>
+<td>id_proveedor</td>
+<td>nombre_proveedor</td>
+</tr>
+<tr class="odd">
+<td>RESPONSABLE</td>
+<td>id_responsable</td>
+<td>descripcion_cargo</td>
+</tr>
+<tr class="even">
+<td>TECNICO</td>
+<td>id_tecnico</td>
+<td>codigo_tecnico, especialidad, activo</td>
+</tr>
+<tr class="odd">
+<td>SEDE_EDUCATIVA</td>
+<td>id_sede</td>
+<td>id_municipio, nombre_sede, zona</td>
+</tr>
+<tr class="even">
+<td>CONEXION</td>
+<td>id_conexion</td>
+<td>id_sede, id_proveedor, tipo, velocidad, vigencias</td>
+</tr>
+<tr class="odd">
+<td>HISTORIAL_ESTADO_CONEXION</td>
+<td>id_historial</td>
+<td>id_conexion, fecha, estado, observaciones</td>
+</tr>
+<tr class="even">
+<td>DISPOSITIVO</td>
+<td>codigo_inventario</td>
+<td>sede, responsable, tipo, fecha, estado</td>
+</tr>
+<tr class="odd">
+<td>INCIDENCIA</td>
+<td>id_incidencia</td>
+<td>sede, conexión, dispositivo, falla y fechas</td>
+</tr>
+<tr class="even">
+<td>MEDICION_USO</td>
+<td>id_medicion</td>
+<td>conexión, fecha y horas activas</td>
+</tr>
+<tr class="odd">
+<td>INCIDENCIA_TECNICO</td>
+<td>id_incidencia, id_tecnico</td>
+<td>rol y fecha</td>
+</tr>
+<tr class="even">
+<td>AUDITORIA_DISPOSITIVO</td>
+<td>id_auditoria</td>
+<td>valores y metadatos del cambio</td>
+</tr>
+</tbody>
+</table>
+<p>Las dependencias completas y las justificaciones adicionales se
+encuentran en <code>docs/dependencias_funcionales.md</code>.</p>
+<h2 data-number="4.6" id="acciones-referenciales"><span
+class="header-section-number">4.6</span> 6. Acciones referenciales</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Acciones</th>
+<th>Aplicación</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ON UPDATE CASCADE</td>
+<td>Todas las FK de relaciones operativas</td>
+<td>Propaga cambios de llaves padres.</td>
+</tr>
+<tr class="even">
+<td>ON DELETE RESTRICT</td>
+<td>Relaciones con catálogos e historial</td>
+<td>Impide borrar entidades que tienen dependencias.</td>
+</tr>
+<tr class="odd">
+<td>ON DELETE CASCADE</td>
+<td>INCIDENCIA_TECNICO → INCIDENCIA</td>
+<td>Elimina solo la asignación dependiente.</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="4.7" id="coherencia-no-cubierta-por-3fn"><span
+class="header-section-number">4.7</span> 7. Coherencia no cubierta por
+3FN</h2>
+<p>Las llaves foráneas garantizan existencia, pero no garantizan que una
+conexión o dispositivo pertenezca a la sede declarada en una incidencia.
+Los triggers insert/update resuelven RN05 mediante validaciones
+cruzadas.</p>
+<h1 data-number="5" id="fase-3-implementación-física"><span
+class="header-section-number">5</span> Fase 3: implementación
+física</h1>
+<h2 data-number="5.1" id="motor-y-creación"><span
+class="header-section-number">5.1</span> 1. Motor y creación</h2>
+<p>El modelo utiliza:</p>
+<ul>
+<li>Base de datos: <code>bd_escuelas_rurales</code>.</li>
+<li>Motor: InnoDB.</li>
+<li>Codificación: <code>utf8mb4</code>.</li>
+<li>Intercalación: <code>utf8mb4_unicode_ci</code>.</li>
+<li>PK autoincrementales o código de inventario natural.</li>
+</ul>
+<h2 data-number="5.2" id="restricciones"><span
+class="header-section-number">5.2</span> 2. Restricciones</h2>
+<p>Se aplicaron:</p>
+<ul>
+<li>PK y FK en las relaciones.</li>
+<li><code>UNIQUE</code> para nombres únicos y códigos anonimizados.</li>
+<li><code>NOT NULL</code> en datos esenciales.</li>
+<li><code>DEFAULT</code> en estados, fechas y usuarios.</li>
+<li><code>CHECK</code> para zonas, tipos de servicio, velocidades,
+fechas, estados, mediciones, especialidades y roles.</li>
+<li><code>ON DELETE</code> y <code>ON UPDATE</code>
+contextualizados.</li>
+</ul>
+<p>El <code>CHECK</code> de <code>CONEXION</code> permite
+<code>Satelital</code>, <code>Fibra</code>, <code>Radioenlace</code> y
+<code>Movil</code>; exige velocidad positiva y vigencia final no
+anterior al inicio.</p>
+<h2 data-number="5.3" id="diccionario-de-datos"><span
+class="header-section-number">5.3</span> 3. Diccionario de datos</h2>
+<p>La especificación completa de tipos, nulabilidad, claves y reglas
+está en <code>docs/diccionario_datos.md</code>. A continuación se
+resumen las tablas principales:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tabla</th>
+<th>Columna clave</th>
+<th>Tipo principal</th>
+<th>Restricción destacada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MUNICIPIO</td>
+<td>id_municipio</td>
+<td>INT</td>
+<td>PK, nombre único</td>
+</tr>
+<tr class="even">
+<td>SEDE_EDUCATIVA</td>
+<td>id_sede</td>
+<td>INT</td>
+<td>FK municipio, zona CHECK</td>
+</tr>
+<tr class="odd">
+<td>CONEXION</td>
+<td>id_conexion</td>
+<td>INT</td>
+<td>velocidad positiva y fechas coherentes</td>
+</tr>
+<tr class="even">
+<td>HISTORIAL_ESTADO_CONEXION</td>
+<td>id_historial</td>
+<td>INT</td>
+<td>estado CHECK e inmutabilidad</td>
+</tr>
+<tr class="odd">
+<td>DISPOSITIVO</td>
+<td>codigo_inventario</td>
+<td>VARCHAR(50)</td>
+<td>estado y responsable</td>
+</tr>
+<tr class="even">
+<td>INCIDENCIA</td>
+<td>id_incidencia</td>
+<td>INT</td>
+<td>sede obligatoria, recursos opcionales</td>
+</tr>
+<tr class="odd">
+<td>MEDICION_USO</td>
+<td>id_medicion</td>
+<td>INT</td>
+<td>horas entre 0 y 744</td>
+</tr>
+<tr class="even">
+<td>INCIDENCIA_TECNICO</td>
+<td>PK compuesta</td>
+<td>INT/INT</td>
+<td>rol CHECK</td>
+</tr>
+<tr class="odd">
+<td>AUDITORIA_DISPOSITIVO</td>
+<td>id_auditoria</td>
+<td>INT</td>
+<td>sin FK para conservar historial</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="5.4" id="carga-de-datos"><span
+class="header-section-number">5.4</span> 4. Carga de datos</h2>
+<p><code>sql/insercion_catalogos.sql</code> genera 50 registros
+para:</p>
+<ul>
+<li>MUNICIPIO</li>
+<li>PROVEEDOR</li>
+<li>RESPONSABLE</li>
+<li>TECNICO</li>
+<li>SEDE_EDUCATIVA</li>
+<li>CONEXION</li>
+<li>HISTORIAL_ESTADO_CONEXION</li>
+<li>DISPOSITIVO</li>
+<li>MEDICION_USO</li>
+<li>AUDITORIA_DISPOSITIVO</li>
+</ul>
+<p>La carga base crea 50 incidencias y asignaciones N:M. El script
+<code>carga_asignaciones_tecnicos.sql</code> añade 10 incidencias
+adicionales y sus asignaciones, obteniendo 60 incidencias y 60
+asignaciones.</p>
+<h1 data-number="6" id="fase-4-lógica-avanzada-y-optimización"><span
+class="header-section-number">6</span> Fase 4: lógica avanzada y
+optimización</h1>
+<h2 data-number="6.1" id="vistas"><span
+class="header-section-number">6.1</span> 1. Vistas</h2>
+<p>Se implementaron cuatro vistas:</p>
+<ol type="1">
+<li><code>vw_resumen_general_sedes</code>: indicadores por sede.</li>
+<li><code>vw_tendencia_mensual_conectividad</code>: tendencias de
+mediciones.</li>
+<li><code>vw_analisis_dimension_geografica_proveedor</code>: análisis
+territorial.</li>
+<li><code>vw_sedes_con_alta_carga_incidencias</code>: sedes con al menos
+dos incidencias y al menos una abierta. Esta consulta usa
+<code>GROUP BY</code> y <code>HAVING</code>.</li>
+</ol>
+<p>Ejemplo con HAVING:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> s.id_sede, s.nombre_sede,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(i.id_incidencia) <span class="kw">AS</span> total_incidencias,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> i.fecha_cierre <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> SEDE_EDUCATIVA s</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span> INCIDENCIA i <span class="kw">ON</span> i.id_sede <span class="op">=</span> s.id_sede</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> s.id_sede, s.nombre_sede</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(i.id_incidencia) <span class="op">&gt;=</span> <span class="dv">2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> <span class="fu">SUM</span>(<span class="cf">CASE</span> <span class="cf">WHEN</span> i.fecha_cierre <span class="kw">IS</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="dv">1</span> <span class="cf">ELSE</span> <span class="dv">0</span> <span class="cf">END</span>) <span class="op">&gt;=</span> <span class="dv">1</span>;</span></code></pre></div>
+<h2 data-number="6.2" id="funciones"><span
+class="header-section-number">6.2</span> 2. Funciones</h2>
+<ul>
+<li><code>fn_horas_reparacion(p_id_incidencia)</code>: diferencia entre
+apertura y cierre.</li>
+<li><code>fn_disponibilidad_pct(p_id_conexion, p_anio, p_mes)</code>:
+porcentaje de disponibilidad mensual a partir de mediciones y días del
+mes.</li>
+</ul>
+<h2 data-number="6.3" id="procedimientos"><span
+class="header-section-number">6.3</span> 3. Procedimientos</h2>
+<ul>
+<li><code>sp_registrar_incidencia</code>: valida datos, registra la
+incidencia, asigna técnico e inserta el estado inicial dentro de una
+transacción.</li>
+<li><code>sp_cerrar_incidencia</code>: bloquea el registro, valida fecha
+y estado, registra cierre e historial, y calcula las horas.</li>
+<li><code>sp_actualizar_dispositivo</code>: valida existencia y cambios,
+actualiza el equipo y permite que los triggers generen auditoría.</li>
+</ul>
+<p>Los procedimientos usan <code>START TRANSACTION</code>,
+<code>COMMIT</code>, <code>ROLLBACK</code> y handlers
+<code>SQLEXCEPTION</code> para evitar cambios parciales.</p>
+<h2 data-number="6.4" id="triggers"><span
+class="header-section-number">6.4</span> 4. Triggers</h2>
+<p>Se implementaron seis triggers:</p>
+<ol type="1">
+<li>Bloqueo de UPDATE en el historial.</li>
+<li>Bloqueo de DELETE en el historial.</li>
+<li>Coherencia de incidencia al insertar.</li>
+<li>Coherencia de incidencia al actualizar.</li>
+<li>Auditoría al insertar un dispositivo.</li>
+<li>Auditoría al cambiar estado físico o responsable.</li>
+</ol>
+<h2 data-number="6.5" id="consultas-analíticas-avanzadas"><span
+class="header-section-number">6.5</span> 5. Consultas analíticas
+avanzadas</h2>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> vw_resumen_general_sedes</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_incidencias_historicas <span class="kw">DESC</span>;</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> vw_tendencia_mensual_conectividad</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> fecha_mes;</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> vw_analisis_dimension_geografica_proveedor</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> municipio;</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> vw_sedes_con_alta_carga_incidencias</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total_incidencias <span class="kw">DESC</span>;</span></code></pre></div>
+<h2 data-number="6.6" id="índices-y-explain"><span
+class="header-section-number">6.6</span> 6. Índices y EXPLAIN</h2>
+<p>El script <code>explain_optimizacion.sql</code> analiza:</p>
+<ul>
+<li>Incidencias por rango de fecha de inicio.</li>
+<li>Incidencias abiertas por fecha de cierre.</li>
+<li>Último estado de una conexión por fecha y ID.</li>
+</ul>
+<p>Los índices analíticos son:</p>
+<ul>
+<li><code>idx_incidencia_fecha_inicio(fecha_inicio)</code>.</li>
+<li><code>idx_incidencia_fecha_cierre(fecha_cierre)</code>.</li>
+<li><code>idx_historial_conexion_fecha(id_conexion, fecha_hora_registro)</code>.</li>
+</ul>
+<p>En la prueba de MariaDB 10.4.34, el análisis por incidencia abierta
+utilizó <code>idx_incidencia_fecha_cierre</code>; la consulta del último
+estado utilizó <code>idx_historial_conexion_fecha</code>.</p>
+<h2 data-number="6.7" id="estrés-concurrente"><span
+class="header-section-number">6.7</span> 7. Estrés concurrente</h2>
+<p>Los scripts <code>estres_concurrencia_sesion_1.sql</code> y
+<code>estres_concurrencia_sesion_2.sql</code> ejecutan dos sesiones:</p>
+<ol type="1">
+<li>La sesión 1 obtiene el bloqueo de fila con
+<code>SELECT ... FOR UPDATE</code>.</li>
+<li>Cambia el estado y mantiene el bloqueo durante cinco segundos.</li>
+<li>La sesión 2 intenta el mismo cambio y espera.</li>
+<li>La sesión 1 confirma con <code>COMMIT</code>.</li>
+<li>La sesión 2 continúa y confirma.</li>
+<li>Los triggers registran ambos cambios en auditoría.</li>
+</ol>
+<h1 data-number="7" id="fase-5-pruebas-y-evidencia"><span
+class="header-section-number">7</span> Fase 5: pruebas y evidencia</h1>
+<h2 data-number="7.1" id="entorno-de-validación"><span
+class="header-section-number">7.1</span> 1. Entorno de validación</h2>
+<p>Se realizó una instalación limpia en Docker con MariaDB 10.4.34 e
+InnoDB. Las instrucciones de instalación pueden repetirse desde:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> sql/script_creacion_tablas.sql</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> sql/insercion_catalogos.sql</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> sql/carga_asignaciones_tecnicos.sql</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> sql/logica_avanzada.sql</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">mysql</span> <span class="at">-u</span> root <span class="at">-p</span> <span class="op">&lt;</span> sql/vistas.sql</span></code></pre></div>
+<h2 data-number="7.2" id="resultado-de-carga"><span
+class="header-section-number">7.2</span> 2. Resultado de carga</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Tabla</th>
+<th style="text-align: right;">Filas verificadas</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MUNICIPIO</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>PROVEEDOR</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td>RESPONSABLE</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>TECNICO</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td>SEDE_EDUCATIVA</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>CONEXION</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td>HISTORIAL_ESTADO_CONEXION</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>DISPOSITIVO</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td>MEDICION_USO</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>AUDITORIA_DISPOSITIVO</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td>INCIDENCIA</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr class="even">
+<td>INCIDENCIA_TECNICO</td>
+<td style="text-align: right;">60</td>
+</tr>
+</tbody>
+</table>
+<h2 data-number="7.3" id="pruebas-de-restricciones"><span
+class="header-section-number">7.3</span> 3. Pruebas de
+restricciones</h2>
+<p>Las pruebas intencionalmente incorrectas confirmaron el rechazo
+de:</p>
+<ul>
+<li>Zona <code>Urbana</code> mediante <code>chk_sede_zona</code>.</li>
+<li>Tipo <code>Cable</code> y velocidad cero mediante restricciones de
+conexión.</li>
+<li>800 horas mensuales mediante <code>chk_medicion_horas</code>.</li>
+</ul>
+<h2 data-number="7.4" id="pruebas-de-objetos-programables"><span
+class="header-section-number">7.4</span> 4. Pruebas de objetos
+programables</h2>
+<p>Las pruebas verificaron:</p>
+<ul>
+<li>Cálculo de horas de reparación.</li>
+<li>Cálculo de disponibilidad.</li>
+<li>Registro y cierre transaccional de una incidencia.</li>
+<li>Imposibilidad de modificar o borrar el historial.</li>
+<li>Coherencia entre sede, conexión y dispositivo.</li>
+<li>Generación de auditoría al modificar dispositivos.</li>
+</ul>
+<h2 data-number="7.5" id="prueba-concurrente"><span
+class="header-section-number">7.5</span> 5. Prueba concurrente</h2>
+<p>La sesión 2 esperó el bloqueo, confirmó su actualización y dejó el
+dispositivo en estado <code>Dañado</code>. La sesión 1 confirmó primero
+el estado <code>Regular</code>. La prueba mostró serialización InnoDB y
+auditoría posterior.</p>
+<h1 data-number="8" id="conclusiones"><span
+class="header-section-number">8</span> Conclusiones</h1>
+<p>El proyecto cumple el ciclo completo: requisitos, diagrama
+conceptual, modelo relacional, normalización hasta 3FN, implementación
+física, carga masiva, restricciones, objetos programables, vistas,
+pruebas y optimización.</p>
+<p>El diseño evita redundancias mediante catálogos y relaciones; protege
+historiales mediante triggers; garantiza coherencia cruzada que las FK
+no pueden expresar por sí solas; y conserva auditorías aun si un equipo
+se retira del inventario.</p>
+<p>El uso de InnoDB, transacciones, bloqueos de fila y claves foráneas
+proporciona integridad bajo operaciones normales y concurrentes.</p>
+<h1 data-number="9" id="trabajo-futuro"><span
+class="header-section-number">9</span> Trabajo futuro</h1>
+<ul>
+<li>Incorporar autenticación, perfiles y permisos de aplicación.</li>
+<li>Crear una interfaz web o móvil para registro y seguimiento.</li>
+<li>Automatizar el cierre de alertas y disponibilidad crítica.</li>
+<li>Incorporar particionado del historial y mediciones por fecha.</li>
+<li>Agregar copias de seguridad y plan de recuperación.</li>
+<li>Crear tablero geográfico de proveedores y sedes.</li>
+<li>Aumentar la automatización de pruebas y publicar resultados por
+versión.</li>
+</ul>
+<h1 data-number="10" id="referencias-de-entrega"><span
+class="header-section-number">10</span> Referencias de entrega</h1>
+<ul>
+<li>Repositorio:
+https://github.com/MatiasGreg/Base-de-datos-Escuelas-Rurales</li>
+<li>Requisitos y diagrama ER:
+<code>docs/fase_1_requisitos_y_diagrama_er.md</code></li>
+<li>Modelo lógico y normalización:
+<code>docs/fase_2_modelo_logico_y_normalizacion.md</code></li>
+<li>Diccionario completo: <code>docs/diccionario_datos.md</code></li>
+<li>Dependencias funcionales:
+<code>docs/dependencias_funcionales.md</code></li>
+<li>Evidencias: <code>docs/evidencias_pruebas.md</code></li>
+<li>Scripts: <code>sql/</code></li>
+</ul>
+</body>
+</html>

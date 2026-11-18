@@ -1,0 +1,32 @@
+digraph ER {
+  graph [rankdir=LR, splines=ortho, bgcolor="white", pad="0.3"];
+  node [shape=record, style="filled", fillcolor="#eef5ff", fontname="Liberation Sans", fontsize=10];
+  edge [fontname="Liberation Sans", fontsize=9, color="#526980"];
+
+  MUNICIPIO [label="{MUNICIPIO|PK id_municipio\lnombre_municipio UK}"];
+  SEDE [label="{SEDE_EDUCATIVA|PK id_sede\nFK id_municipio\nnombre_sede\nzona}"];
+  PROVEEDOR [label="{PROVEEDOR|PK id_proveedor\nnombre_proveedor UK}"];
+  CONEXION [label="{CONEXION|PK id_conexion\nFK id_sede\nFK id_proveedor\ntipo_servicio\nvelocidad_mbps\nvigencias}"];
+  HIST [label="{HISTORIAL_ESTADO_CONEXION|PK id_historial\nFK id_conexion\nfecha_hora_registro\nestado_actual\nobservaciones}"];
+  MEDICION [label="{MEDICION_USO|PK id_medicion\nFK id_conexion\nfecha_medicion\nhoras_servicio_activo}"];
+  RESPONSABLE [label="{RESPONSABLE|PK id_responsable\ndescripcion_cargo UK}"];
+  DISPOSITIVO [label="{DISPOSITIVO|PK codigo_inventario\nFK id_sede\nFK id_responsable\ntipo_dispositivo\nfecha_entrega\nestado_fisico}"];
+  INCIDENCIA [label="{INCIDENCIA|PK id_incidencia\nFK id_sede\nFK id_conexion NULL\nFK codigo_inventario NULL\ndescripcion_falla\nfechas apertura/cierre}"];
+  TECNICO [label="{TECNICO|PK id_tecnico\ncodigo_tecnico UK\nespecialidad\nactivo}"];
+  ASIGNACION [label="{INCIDENCIA_TECNICO|PK/FK id_incidencia\nPK/FK id_tecnico\nrol_asignado\nfecha_asignacion}"];
+  AUDITORIA [label="{AUDITORIA_DISPOSITIVO|PK id_auditoria\ncodigo_inventario sin FK\nestados y responsables\nusuario, fecha, origen}"];
+
+  MUNICIPIO -> SEDE [label="1:N"];
+  PROVEEDOR -> CONEXION [label="1:N"];
+  SEDE -> CONEXION [label="1:N"];
+  CONEXION -> HIST [label="1:N"];
+  CONEXION -> MEDICION [label="1:N"];
+  SEDE -> DISPOSITIVO [label="1:N"];
+  RESPONSABLE -> DISPOSITIVO [label="1:N"];
+  SEDE -> INCIDENCIA [label="1:N"];
+  CONEXION -> INCIDENCIA [label="0:N"];
+  DISPOSITIVO -> INCIDENCIA [label="0:N"];
+  INCIDENCIA -> ASIGNACION [label="1:N"];
+  TECNICO -> ASIGNACION [label="1:N"];
+  DISPOSITIVO -> AUDITORIA [label="trazabilidad sin FK", style=dashed];
+}
