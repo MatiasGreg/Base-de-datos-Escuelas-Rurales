@@ -13,7 +13,11 @@ Diseñado y probado para **MariaDB 10.4+** y compatible con **MySQL 8+**.
 - `sql/vistas.sql`: vistas de consulta.
 - `sql/pruebas_fase4.sql`: pruebas de restricciones y lógica avanzada.
 - `sql/explain_optimizacion.sql`: análisis de planes de ejecución e índices.
+- `sql/estres_concurrencia_sesion_1.sql` y `sql/estres_concurrencia_sesion_2.sql`: prueba de dos sesiones concurrentes.
 - `docs/evidencias_pruebas.md`: resumen de resultados de pruebas.
+- `docs/diccionario_datos.md`: diccionario completo de tablas y columnas.
+- `docs/dependencias_funcionales.md`: matriz de dependencias y decisiones de normalización.
+- `docs/memoria_tecnica_borrador.md`: borrador de la memoria técnica final.
 
 ## Requisitos
 
@@ -33,7 +37,8 @@ mysql -u root -p < sql/logica_avanzada.sql
 mysql -u root -p < sql/vistas.sql
 ```
 
-La carga principal crea municipios, proveedores, responsables, técnicos, sedes, conexiones, dispositivos y mediciones base.
+La carga principal genera como mínimo 50 registros por tabla, incluyendo
+historial, incidencias, mediciones, asignaciones N:M y auditoría.
 
 ## Pruebas
 
@@ -77,4 +82,11 @@ Consultar el análisis geográfico y de proveedores:
 ```sql
 SELECT * FROM vw_analisis_dimension_geografica_proveedor
 ORDER BY municipio;
+```
+
+Consultar sedes con alta carga de incidencias:
+
+```sql
+SELECT * FROM vw_sedes_con_alta_carga_incidencias
+ORDER BY total_incidencias DESC;
 ```

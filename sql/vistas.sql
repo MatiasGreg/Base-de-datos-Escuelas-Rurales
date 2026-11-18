@@ -11,6 +11,7 @@ USE bd_escuelas_rurales;
 DROP VIEW IF EXISTS vw_resumen_general_sedes;
 DROP VIEW IF EXISTS vw_tendencia_mensual_conectividad;
 DROP VIEW IF EXISTS vw_analisis_dimension_geografica_proveedor;
+DROP VIEW IF EXISTS vw_sedes_con_alta_carga_incidencias;
 
 -- RESUMEN POR SEDE
 CREATE VIEW vw_resumen_general_sedes AS
@@ -148,3 +149,24 @@ LEFT JOIN (
     JOIN MEDICION_USO mu ON mu.id_conexion = c.id_conexion
     GROUP BY s.id_municipio
 ) med ON med.id_municipio = m.id_municipio;
+
+-- SEDES CON CARGA OPERATIVA SUPERIOR AL PROMEDIO.
+-- HAVING filtra despues de la agregacion, no como una condicion de filas.
+CREATE VIEW vw_sedes_con_alta_carga_incidencias AS
+SELECT
+    s.id_sede,
+    s.nombre_sede AS sede,
+    m.nombre_municipio AS municipio,
+    COUNT(i.id_incidencia) AS total_incidencias,
+    SUM(CASE WHEN i.fecha_cierre IS NULL THEN 1 ELSE 0 END) AS incidencias_abiertas,
+    ROUND(AVG(CASE
+        WHEN i.fecha_cierre IS NOT NULL
+        THEN TIMESTAMPDIFF(MINUTE, i.fecha_inicio, i.fecha_cierre) / 60
+        ELSE NULL
+    END), 2) AS horas_reparacion_promedio
+FROM SEDE_EDUCATIVA s
+JOIN MUNICIPIO m ON m.id_municipio = s.id_municipio
+JOIN INCIDENCIA i ON i.id_sede = s.id_sede
+GROUP BY s.id_sede, s.nombre_sede, m.nombre_municipio
+HAVING COUNT(i.id_incidencia) >= 2
+   AND SUM(CASE WHEN i.fecha_cierre IS NULL THEN 1 ELSE 0 END) >= 1;
