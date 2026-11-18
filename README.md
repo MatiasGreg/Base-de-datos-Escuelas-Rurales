@@ -8,6 +8,7 @@ Diseñado y probado para **MariaDB 10.4+** y compatible con **MySQL 8+**.
 
 - `sql/script_creacion_tablas.sql`: estructura completa de tablas, llaves foráneas y restricciones.
 - `sql/insercion_catalogos.sql`: catálogos y datos base.
+- `sql/carga_masiva.sql`: carga masiva completa con los catálogos y las asignaciones N:M.
 - `sql/carga_asignaciones_tecnicos.sql`: asignación principal y de apoyo de técnicos.
 - `sql/logica_avanzada.sql`: funciones, procedimientos almacenados y triggers.
 - `sql/vistas.sql`: vistas de consulta.
@@ -32,11 +33,14 @@ Ejecute los scripts en este orden:
 
 ```bash
 mysql -u root -p < sql/script_creacion_tablas.sql
-mysql -u root -p < sql/insercion_catalogos.sql
-mysql -u root -p < sql/carga_asignaciones_tecnicos.sql
+mysql -u root -p < sql/carga_masiva.sql
 mysql -u root -p < sql/logica_avanzada.sql
 mysql -u root -p < sql/vistas.sql
 ```
+
+`carga_masiva.sql` reúne `insercion_catalogos.sql` y
+`carga_asignaciones_tecnicos.sql`, por lo que genera la carga completa en un
+solo paso. Los scripts anteriores también pueden ejecutarse por separado.
 
 La carga principal genera como mínimo 50 registros por tabla, incluyendo
 historial, incidencias, mediciones, asignaciones N:M y auditoría.
