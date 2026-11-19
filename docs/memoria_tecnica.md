@@ -234,6 +234,9 @@ La especificación completa de tipos, nulabilidad, claves y reglas está en
 | Tabla | Columna clave | Tipo principal | Restricción destacada |
 |---|---|---|---|
 | MUNICIPIO | id_municipio | INT | PK, nombre único |
+| PROVEEDOR | id_proveedor | INT | PK, nombre único |
+| RESPONSABLE | id_responsable | INT | PK, descripción única |
+| TECNICO | id_tecnico | INT | código único, especialidad CHECK |
 | SEDE_EDUCATIVA | id_sede | INT | FK municipio, zona CHECK |
 | CONEXION | id_conexion | INT | velocidad positiva y fechas coherentes |
 | HISTORIAL_ESTADO_CONEXION | id_historial | INT | estado CHECK e inmutabilidad |

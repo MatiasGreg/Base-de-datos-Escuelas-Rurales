@@ -68,7 +68,7 @@ CREATE VIEW vw_tendencia_mensual_conectividad AS
 SELECT
     DATE_FORMAT(mu.fecha_medicion, '%Y-%m-01') AS fecha_mes,
     COUNT(*) AS total_mediciones,
-    COUNT(DISTINCT mu.id_conexion) AS conexiones_medicadas,
+    COUNT(DISTINCT mu.id_conexion) AS conexiones_medidas,
     ROUND(SUM(mu.horas_servicio_activo), 2) AS horas_servicio_total,
     ROUND(AVG(mu.horas_servicio_activo), 2) AS horas_servicio_promedio,
     ROUND(AVG(mu.horas_servicio_activo / 744 * 100), 2) AS disponibilidad_promedio_pct,

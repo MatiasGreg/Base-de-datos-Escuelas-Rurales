@@ -107,7 +107,7 @@ A continuación se detallan las entidades del sistema con sus respectivos atribu
 *   **MUNICIPIO:** `id_municipio` (PK), `nombre_municipio` (UNIQUE, NOT NULL).
 *   **SEDE_EDUCATIVA:** `id_sede` (PK), `id_municipio` (FK, NOT NULL), `nombre_sede` (NOT NULL), `zona` (Dominio: *'Rural', 'Palafito'*, NOT NULL).
 *   **PROVEEDOR:** `id_proveedor` (PK), `nombre_proveedor` (UNIQUE, NOT NULL).
-*   **CONEXION:** `id_conexion` (PK), `id_sede` (FK, NOT NULL), `id_proveedor` (FK, NOT NULL), `tipo_servicio` (Dominio: *'Satelital', 'Fibra', 'Radioenlace'*, NOT NULL), `velocidad_mbps` (Numérico, NOT NULL, mayor que 0), `vigencia_inicio` (Fecha, NOT NULL), `vigencia_fin` (Fecha, NULL, no anterior a `vigencia_inicio`).
+*   **CONEXION:** `id_conexion` (PK), `id_sede` (FK, NOT NULL), `id_proveedor` (FK, NOT NULL), `tipo_servicio` (Dominio: *'Satelital', 'Fibra', 'Radioenlace', 'Movil'*, NOT NULL), `velocidad_mbps` (Numérico, NOT NULL, mayor que 0), `vigencia_inicio` (Fecha, NOT NULL), `vigencia_fin` (Fecha, NULL, no anterior a `vigencia_inicio`).
 *   **HISTORIAL_ESTADO_CONEXION:** `id_historial` (PK), `id_conexion` (FK, NOT NULL), `fecha_hora_registro` (Timestamp, NOT NULL, por defecto la fecha y hora actual), `estado_actual` (Dominio: *'Activo', 'Intermitente', 'Caído'*, NOT NULL), `observaciones` (Texto, NULL). Tabla inmutable (RN02): solo admite INSERT.
 *   **RESPONSABLE:** `id_responsable` (PK), `descripcion_cargo` (UNIQUE, NOT NULL).
 *   **DISPOSITIVO:** `codigo_inventario` (PK Alfanumérica, NOT NULL), `id_sede` (FK, NOT NULL), `id_responsable` (FK, NOT NULL), `tipo_dispositivo` (NOT NULL), `fecha_entrega` (Fecha, NOT NULL, por defecto la fecha actual), `estado_fisico` (Dominio: *'Bueno', 'Regular', 'Dañado'*, NOT NULL, por defecto *'Bueno'*).
