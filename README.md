@@ -98,3 +98,8 @@ Consultar sedes con alta carga de incidencias:
 SELECT * FROM vw_sedes_con_alta_carga_incidencias
 ORDER BY total_incidencias DESC;
 ```
+
+## Responsables
+
+- Tomás Alejandro Polanco Siado
+- Matías Gregorio Muñoz Carrillo
