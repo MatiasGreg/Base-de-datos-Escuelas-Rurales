@@ -51,19 +51,25 @@ WHERE c.vigencia_inicio <= DATE(@fecha_estado)
 ORDER BY s.nombre_sede, c.id_conexion;
 
 -- 3. Cobertura por municipio.
-SELECT m.nombre_municipio AS municipio,
-       COUNT(s.id_sede) AS total_sedes,
-       COUNT(DISTINCT CASE WHEN c.id_conexion IS NOT NULL THEN s.id_sede END)
-           AS sedes_con_conexion,
-       ROUND(
-           100 * COUNT(DISTINCT CASE WHEN c.id_conexion IS NOT NULL THEN s.id_sede END)
-           / NULLIF(COUNT(s.id_sede), 0), 2
-       ) AS cobertura_pct
-FROM MUNICIPIO m
-LEFT JOIN SEDE_EDUCATIVA s ON s.id_municipio = m.id_municipio
-LEFT JOIN CONEXION c ON c.id_sede = s.id_sede
-GROUP BY m.id_municipio, m.nombre_municipio
-ORDER BY cobertura_pct IS NULL, cobertura_pct, municipio;
+SELECT cobertura.municipio,
+       cobertura.total_sedes,
+       cobertura.sedes_con_conexion,
+       cobertura.cobertura_pct
+FROM (
+    SELECT m.nombre_municipio AS municipio,
+           COUNT(DISTINCT s.id_sede) AS total_sedes,
+           COUNT(DISTINCT CASE WHEN c.id_conexion IS NOT NULL THEN s.id_sede END)
+               AS sedes_con_conexion,
+           ROUND(
+               100 * COUNT(DISTINCT CASE WHEN c.id_conexion IS NOT NULL THEN s.id_sede END)
+               / NULLIF(COUNT(DISTINCT s.id_sede), 0), 2
+           ) AS cobertura_pct
+    FROM MUNICIPIO m
+    LEFT JOIN SEDE_EDUCATIVA s ON s.id_municipio = m.id_municipio
+    LEFT JOIN CONEXION c ON c.id_sede = s.id_sede
+    GROUP BY m.id_municipio, m.nombre_municipio
+) cobertura
+ORDER BY cobertura.cobertura_pct ASC, cobertura.municipio ASC;
 
 -- 4. Cantidad y antigüedad promedio de dispositivos por sede.
 SELECT s.id_sede, m.nombre_municipio AS municipio, s.nombre_sede,
