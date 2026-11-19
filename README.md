@@ -19,6 +19,10 @@ Diseñado y probado para **MariaDB 10.4+** y compatible con **MySQL 8+**.
 - `docs/dependencias_funcionales.md`: matriz de dependencias y decisiones de normalización.
 - `docs/memoria_tecnica.pdf`: memoria técnica final en PDF.
 - `docs/memoria_tecnica.md`: fuente editable de la memoria técnica.
+- `documentos/enunciado_completo.md`: guía oficial, alcance, reglas y consultas requeridas.
+- `documentos/casos_de_uso.md`: casos normales, inválidos y de borde.
+- `documentos/roles.md`: actores, responsabilidades y alcance de los roles.
+- `sql/consultas.sql`: consultas operativas y reportes del sistema.
 
 ## Requisitos
 
