@@ -46,9 +46,11 @@ historial, incidencias, mediciones, asignaciones N:M y auditoría.
 Después de cargar el proyecto completo:
 
 ```bash
-mysql --force -t bd_escuelas_rurales < sql/pruebas_fase4.sql
-mysql -t bd_escuelas_rurales < sql/explain_optimizacion.sql
+mysql -u root -p --force -t bd_escuelas_rurales < sql/pruebas_fase4.sql
+mysql -u root -p -t bd_escuelas_rurales < sql/explain_optimizacion.sql
 ```
+
+Cuando se solicite la contraseña, ingrese la contraseña del usuario `root` de MySQL. En una instalación de XAMPP sin contraseña para `root`, presione `Enter`.
 
 Las pruebas incluyen comprobaciones de CHECK, NOT NULL, UNIQUE, claves foráneas, tabla N:M, funciones, procedimientos, transacciones, triggers e inmutabilidad del historial.
 
