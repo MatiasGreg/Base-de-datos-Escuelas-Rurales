@@ -22,6 +22,7 @@ Diseñado y probado para **MariaDB 10.4+** y compatible con **MySQL 8+**.
 - `documentos/enunciado_completo.md`: guía oficial, alcance, reglas y consultas requeridas.
 - `documentos/casos_de_uso.md`: casos normales, inválidos y de borde.
 - `documentos/roles.md`: actores, responsabilidades y alcance de los roles.
+- `documentos/informacion_proyecto.md`: responsables, institución, guía y problema asignado.
 - `sql/consultas.sql`: consultas operativas y reportes del sistema.
 
 ## Requisitos
